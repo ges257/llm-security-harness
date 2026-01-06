@@ -31,6 +31,43 @@ st.set_page_config(
     layout="wide"
 )
 
+# custom CSS for sidebar toggle button
+st.markdown("""
+<style>
+/* Sidebar toggle button - bold and obvious */
+button[data-testid="stSidebarCollapseButton"],
+[data-testid="collapsedControl"] button,
+section[data-testid="stSidebar"] + div button:first-child {
+    font-size: 1.2rem !important;
+    width: 2.4rem !important;
+    height: 2.4rem !important;
+    min-width: 2.4rem !important;
+    min-height: 2.4rem !important;
+    background-color: #A78BFA !important;
+    border-radius: 10px !important;
+    border: 3px solid #8B5CF6 !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 12px rgba(167, 139, 250, 0.4) !important;
+}
+
+button[data-testid="stSidebarCollapseButton"] svg,
+[data-testid="collapsedControl"] svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    color: #0D1B2A !important;
+    stroke: #0D1B2A !important;
+    stroke-width: 3px !important;
+}
+
+button[data-testid="stSidebarCollapseButton"]:hover,
+[data-testid="collapsedControl"] button:hover {
+    background-color: #8B5CF6 !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 6px 16px rgba(167, 139, 250, 0.6) !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # check api availability
 API_AVAILABLE = bool(ANTHROPIC_API_KEY) and ANTHROPIC_API_KEY != "your_api_key_here"
 
