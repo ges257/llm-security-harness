@@ -12,7 +12,7 @@ Date: December 2025
 """
 
 from anthropic import Anthropic
-from .config import ANTHROPIC_API_KEY, MODEL_NAME, SYSTEM_PROMPT, CANARY_TOKEN
+from config import ANTHROPIC_API_KEY, MODEL_NAME, SYSTEM_PROMPT, CANARY_TOKEN
 
 
 class LLMClient:
