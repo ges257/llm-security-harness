@@ -1,15 +1,3 @@
----
-title: LLM Security Harness
-emoji: 🛡️
-colorFrom: indigo
-colorTo: purple
-sdk: streamlit
-sdk_version: 1.29.0
-app_file: app/app.py
-pinned: false
-license: mit
----
-
 ![Header](https://capsule-render.vercel.app/api?type=rect&color=0D1B2A&height=100&text=LLM%20Security%20Harness&fontSize=36&fontColor=A78BFA)
 
 <div align="center">
