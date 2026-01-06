@@ -1,12 +1,37 @@
-# LLM Security Harness
+---
+title: LLM Security Harness
+emoji: 🛡️
+colorFrom: indigo
+colorTo: purple
+sdk: streamlit
+sdk_version: 1.29.0
+app_file: app/app.py
+pinned: false
+license: mit
+---
 
-A red teaming harness for measuring LLM prompt injection vulnerability and quantifying guardrail effectiveness.
+![Header](https://capsule-render.vercel.app/api?type=rect&color=0D1B2A&height=100&text=LLM%20Security%20Harness&fontSize=36&fontColor=A78BFA)
 
-![Python](https://img.shields.io/badge/Python-A3B8CC?style=flat-square&logo=python&logoColor=0D1B2A)
-![Streamlit](https://img.shields.io/badge/Streamlit-A3B8CC?style=flat-square&logo=streamlit&logoColor=0D1B2A)
-![Claude](https://img.shields.io/badge/Claude_API-A3B8CC?style=flat-square&logo=anthropic&logoColor=0D1B2A)
-![AI Safety](https://img.shields.io/badge/AI_Safety-A78BFA?style=flat-square)
+<div align="center">
+
+**Red Teaming Harness for Prompt Injection Vulnerability Assessment**
+
+![Python](https://img.shields.io/badge/Python-3.10+-A3B8CC?style=flat-square)
+![Claude](https://img.shields.io/badge/Claude_API-Anthropic-A3B8CC?style=flat-square)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-A78BFA?style=flat-square)
 [![Demo](https://img.shields.io/badge/Demo-HuggingFace_Spaces-A78BFA?style=flat-square)](https://huggingface.co/spaces/ges257/llm-security-harness)
+
+</div>
+
+---
+
+## Outcome
+
+Keyword filter guardrail achieved **100% attack blocking** with **0% over-refusal** on a 50-case benchmark. Built a quantitative framework for evaluating LLM security with canary token detection, implementing three defense variants (baseline, regex, semantic) to demonstrate defense-in-depth value.
+
+## Technical Build
+
+Designed canary token methodology for binary ground-truth measurement of prompt injection success. Implemented 25+ regex patterns covering 6 attack categories (instruction override, prompt extraction, jailbreak, delimiter attacks). Built LLM-based semantic classifier using Claude Haiku for intent-based detection with 0.7 confidence threshold.
 
 ---
 
@@ -18,48 +43,27 @@ A red teaming harness for measuring LLM prompt injection vulnerability and quant
 | **Keyword Filter** | **30/30 (100%)** | **0%** | **0%** |
 | LLM Classifier | 26/30 (87%) | 0% | 0% |
 
-**Key Finding:** Keyword filter achieved 100% attack blocking with zero false positives on benign queries.
+**Key Finding:** Claude's inherent robustness means 0% canary leaks even without guardrails. The keyword filter provides defense-in-depth with zero latency.
 
 ---
 
 ## How It Works
 
-1. A **canary token** (`CANARY_7X9K2M`) is embedded in the LLM's system prompt
-2. Attack prompts attempt to extract this secret through various injection techniques
-3. **Guardrails** filter input before it reaches the model
-4. Success = canary appears in response (attack succeeded)
-
-### Guardrail Variants
-
-| Variant | Method | Strengths |
-|---------|--------|-----------|
-| **Baseline** | No protection | Control group, measures inherent model robustness |
-| **Keyword Filter** | 25+ regex patterns | Deterministic, zero latency, 100% coverage |
-| **LLM Classifier** | Claude Haiku semantic analysis | Catches novel patterns, intent-based |
-
----
-
-## Quick Start
-
-```bash
-# Clone
-git clone https://github.com/ges257/llm-security-harness.git
-cd llm-security-harness
-
-# Install
-pip install -r requirements.txt
-
-# Configure API (optional - works offline with pre-computed results)
-cp .env.example .env
-# Edit .env with your ANTHROPIC_API_KEY
-
-# Run
-streamlit run app/app.py
+```
+User Input → Guardrail Layer → Claude API → Canary Detection
+                  ↓                              ↓
+           [Block/Pass]            [Canary in response?]
 ```
 
+| Variant | Method | Latency | Coverage |
+|---------|--------|---------|----------|
+| **Baseline** | Pass-through | 0ms | Control group |
+| **Keyword Filter** | 25+ regex patterns | <1ms | 100% on known attacks |
+| **LLM Classifier** | Claude Haiku semantic | 200-500ms | 87% with novel patterns |
+
 ---
 
-## Attack Categories Tested
+## Attack Categories
 
 | Category | Example | Count |
 |----------|---------|-------|
@@ -71,6 +75,41 @@ streamlit run app/app.py
 | Delimiter Attacks | "</system>..." | 5 |
 
 Plus 20 benign queries for over-refusal measurement.
+
+---
+
+## Project Structure
+
+```
+llm-security-harness/
+├── app/
+│   ├── app.py              # Streamlit dashboard (HF entry point)
+│   ├── guardrails/         # Baseline, keyword, LLM classifier
+│   ├── config.py           # Canary token, API settings
+│   ├── evaluator.py        # Benchmark runner
+│   ├── data/testcases.csv  # 50 test cases
+│   └── results/results.csv # Pre-computed benchmark
+├── README.md
+├── ARCHITECTURE.md         # System diagrams
+├── CHALLENGES.md           # Problem-solving narrative
+└── LEARNINGS.md            # Insights and trade-offs
+```
+
+---
+
+## Usage
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure API (optional - works offline with pre-computed results)
+cp .env.example .env
+# Edit .env with your ANTHROPIC_API_KEY
+
+# Run Streamlit app
+streamlit run app/app.py
+```
 
 ---
 
@@ -89,4 +128,16 @@ Plus 20 benign queries for over-refusal measurement.
 
 ---
 
-*Built for AI Security Research*
+## License
+
+MIT
+
+---
+
+<div align="center">
+
+**Part of the AI/ML Portfolio**
+
+[GitHub](https://github.com/ges257) | [LinkedIn](https://linkedin.com/in/gregory-e-schwartz)
+
+</div>
