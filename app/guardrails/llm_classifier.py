@@ -11,8 +11,8 @@ Professor: Jiang (Jay) Zhou, Ph.D
 Date: December 2025
 """
 
-from ..llm_client import LLMClient
-from ..config import CLASSIFIER_THRESHOLD
+from llm_client import LLMClient
+from config import CLASSIFIER_THRESHOLD
 
 
 class LLMClassifierGuardrail:

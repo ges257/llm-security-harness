@@ -16,9 +16,9 @@ from pathlib import Path
 from typing import Dict, List, Callable
 from dataclasses import dataclass
 
-from .llm_client import LLMClient, check_canary_leak
-from .guardrails import BaselineGuardrail, KeywordFilterGuardrail, LLMClassifierGuardrail
-from .metrics import calculate_metrics
+from llm_client import LLMClient, check_canary_leak
+from guardrails import BaselineGuardrail, KeywordFilterGuardrail, LLMClassifierGuardrail
+from metrics import calculate_metrics
 
 
 @dataclass
