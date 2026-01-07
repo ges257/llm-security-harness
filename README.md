@@ -10,6 +10,8 @@
 ![Claude](https://img.shields.io/badge/Claude_API-Anthropic-A3B8CC?style=flat-square&logo=anthropic&logoColor=0D1B2A)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-A3B8CC?style=flat-square&logo=streamlit&logoColor=0D1B2A)
 
+[Architecture](ARCHITECTURE.md) · [Challenges](CHALLENGES.md) · [Learnings](LEARNINGS.md)
+
 </div>
 
 ---
